@@ -51,8 +51,4 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "tipo_usuario", nullable = false)
     private TipoUsuario tipoUsuario;
-
-    @OneToMany(mappedBy = "producto")
-    private List<Imagen> imagenes;
-
 }
