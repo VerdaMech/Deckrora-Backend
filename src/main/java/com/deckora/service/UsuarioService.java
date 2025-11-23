@@ -85,4 +85,11 @@ public class UsuarioService {
             return null;
         }
     }
+
+    // Metodo para login
+    public Usuario login(String correo, String contrasenia) {
+    return usuarioRepository.findByCorreoAndContrasenia(correo, contrasenia)
+            .orElse(null);
+    }
+
 }

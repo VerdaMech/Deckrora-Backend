@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.deckora.model.Usuario;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
@@ -18,4 +19,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
     //Metodos nuevos :D
     List<Usuario> findByNombreAndApellido(String nombre, String apellido); 
     List<Usuario> findByNombreAndTipoUsuarioId(String nombre, Integer tipoUsuario);
+
+    // MEtodos para el login
+    Optional<Usuario> findByCorreo(String correo);
+
+    Optional<Usuario> findByCorreoAndContrasenia(String correo, String contrasenia);
 }
