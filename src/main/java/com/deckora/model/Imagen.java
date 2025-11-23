@@ -1,5 +1,7 @@
 package com.deckora.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,10 @@ public class Imagen {
     @Column(nullable=false)
     private String ruta;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="producto", nullable=false)
     private Producto producto;
+
+
 }

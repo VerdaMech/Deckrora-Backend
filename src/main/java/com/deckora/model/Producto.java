@@ -3,6 +3,7 @@ package com.deckora.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,5 +47,10 @@ public class Producto {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("producto")
     private List<ProductosOrdenes> ordenes;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "producto")
+    private List<Imagen> imagenes;
+
 
 }

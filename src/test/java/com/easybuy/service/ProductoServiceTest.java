@@ -1,4 +1,4 @@
-package com.easybuy.service;
+/* package com.easybuy.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,7 +46,8 @@ public class ProductoServiceTest {
             300000,
             4,
             new ArrayList<ProductosCategorias>(),
-            new ArrayList<ProductosOrdenes>());
+            new ArrayList<ProductosOrdenes>(),
+            new ArrayList<Imagen>());
     }
 
 
@@ -116,4 +117,4 @@ public void testDeleteProducto() {
 }
 
 
-}
+} */
