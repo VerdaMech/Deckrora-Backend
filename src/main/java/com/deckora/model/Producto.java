@@ -39,18 +39,30 @@ public class Producto {
     @Column(length = 3, nullable = false)
     private int cantidad;
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    //@JsonManagedReference(value = "producto-productoCategorias")
-    @JsonIgnoreProperties("producto")
-    private List<ProductosCategorias> categorias;
+    @OneToMany(
+    mappedBy = "producto",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true
+)
+@JsonIgnoreProperties("producto")
+private List<ProductosCategorias> categorias;
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("producto")
-    private List<ProductosOrdenes> ordenes;
+@OneToMany(
+    mappedBy = "producto",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true
+)
+@JsonIgnoreProperties("producto")
+private List<ProductosOrdenes> ordenes;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "producto")
-    private List<Imagen> imagenes;
+@OneToMany(
+    mappedBy = "producto",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true
+)
+@JsonIgnoreProperties("producto")
+private List<Imagen> imagenes;
+
 
 
 }
