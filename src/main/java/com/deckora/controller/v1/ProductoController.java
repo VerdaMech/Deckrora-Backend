@@ -1,4 +1,4 @@
-package com.deckora.controller;
+package com.deckora.controller.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

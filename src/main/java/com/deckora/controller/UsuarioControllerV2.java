@@ -1,6 +1,7 @@
 package com.deckora.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.deckora.assemblers.UsuarioModelAssembler;
 import com.deckora.model.LoginRequest;
 import com.deckora.model.Usuario;
+/* import com.deckora.security.JwtUtil; */
 import com.deckora.service.UsuarioService;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -40,6 +42,9 @@ public class UsuarioControllerV2 {
 
     @Autowired
     private UsuarioModelAssembler assembler;
+
+   /*  @Autowired
+    private JwtUtil jwtUtil; */
 
     @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Este método obtiene todos los usuarios", description = "Muestra una lista de todos los usuarios creados")
@@ -152,19 +157,39 @@ public class UsuarioControllerV2 {
         return ResponseEntity.noContent().build();
     }
 
-    // Metodo para el login
-    @PostMapping("/login")
-    @Operation(summary = "Login de usuario")
+/*     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
         Usuario usuario = usuarioService.login(
-                request.getCorreo(),
-                request.getContrasenia());
+            request.getCorreo(),
+            request.getContrasenia()
+        );
 
         if (usuario == null) {
             return ResponseEntity.status(401).body("Correo o contraseña incorrectos");
         }
 
-        return ResponseEntity.ok(usuario); // Devuelve el usuario completo
-    }
+        String token = jwtUtil.generarToken(usuario.getCorreo());
+
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "usuario", usuario
+        ));
+    } */
+
+    @PostMapping("/login")
+    @Operation(summary = "Login de usuario")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+
+        Usuario usuario = usuarioService.login(
+            request.getCorreo(),
+            request.getContrasenia()
+        );
+
+        if (usuario == null) {
+            return ResponseEntity.status(401).body("Correo o contraseña incorrectos");
+        }
+
+        return ResponseEntity.ok(usuario);
+    } 
 }

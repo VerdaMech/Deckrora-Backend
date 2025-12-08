@@ -1,4 +1,4 @@
-package com.deckora.controller;
+package com.deckora.controller.v1;
 
 import java.util.List;
 
@@ -15,56 +15,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deckora.model.Orden;
-import com.deckora.service.OrdenService;
+import com.deckora.model.Categoria;
+import com.deckora.service.CategoriaService;
 
 @RestController
-@RequestMapping("/api/v1/ordenes")
-public class OrdenController {
+@RequestMapping("/api/v1/categorias")
+public class CategoriaController {
 
     @Autowired
-    private OrdenService ordenService;
+    private CategoriaService categoriaService;
 
     @GetMapping
-    public ResponseEntity<List<Orden>> listar(){
-        List<Orden> listaOrdens = ordenService.findAll();
-        if(listaOrdens.isEmpty()){
+    public ResponseEntity<List<Categoria>> listar(){
+        List<Categoria> listaCategorias = categoriaService.findAll();
+        if(listaCategorias.isEmpty()){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(listaOrdens);
+        return ResponseEntity.ok(listaCategorias);
     }
 
     @PostMapping
-    public ResponseEntity<Orden> guardar(@RequestBody Orden orden){
-        Orden newOrden = ordenService.save(orden);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newOrden);
+    public ResponseEntity<Categoria> guardar(@RequestBody Categoria categoria){
+        Categoria nuevaCategoria = categoriaService.save(categoria);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaCategoria);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Orden> buscar(@PathVariable Long id){
+    public ResponseEntity<Categoria> buscar(@PathVariable Long id){
         try{
-            Orden orden = ordenService.findById(id);
-            return ResponseEntity.ok(orden);
+            Categoria categoria = categoriaService.findById(id);
+            return ResponseEntity.ok(categoria);
         }catch (Exception e){
             return ResponseEntity.notFound().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Orden> actualizar(@PathVariable Long id, @RequestBody Orden orden){
+    public ResponseEntity<Categoria> actualizar(@PathVariable Long id, @RequestBody Categoria categoria){
         try{
-            ordenService.save(orden);
-            return ResponseEntity.ok(orden);
+            categoriaService.save(categoria);
+            return ResponseEntity.ok(categoria);
         }catch( Exception e){
             return ResponseEntity.notFound().build();
         }
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Orden> patchOrden(@PathVariable Long id, @RequestBody Orden parcialOrden) {
+    public ResponseEntity<Categoria> patchCategoria(@PathVariable Long id, @RequestBody Categoria parcialCategoria) {
         try {
-            Orden actualizarOrden = ordenService.patchOrden(id, parcialOrden);
-            return ResponseEntity.ok(actualizarOrden);
+            Categoria actualizarCategoria = categoriaService.patchCategoria(id, parcialCategoria);
+            return ResponseEntity.ok(actualizarCategoria);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
@@ -73,7 +73,7 @@ public class OrdenController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id){
         try{
-            ordenService.delete(id);
+            categoriaService.delete(id);
             return ResponseEntity.noContent().build();
         }catch (Exception e){
             return ResponseEntity.notFound().build();

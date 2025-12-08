@@ -1,4 +1,4 @@
-package com.deckora.controller;
+package com.deckora.controller.v1;
 
 import org.springframework.web.bind.annotation.RestController;
 

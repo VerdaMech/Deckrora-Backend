@@ -1,4 +1,4 @@
-package com.deckora.controller;
+package com.deckora.controller.v1;
 
 import java.util.List;
 
@@ -15,56 +15,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deckora.model.Categoria;
-import com.deckora.service.CategoriaService;
+import com.deckora.model.Envio;
+import com.deckora.service.EnvioService;
 
 @RestController
-@RequestMapping("/api/v1/categorias")
-public class CategoriaController {
+@RequestMapping("/api/v1/envios")
+public class EnvioController {
 
     @Autowired
-    private CategoriaService categoriaService;
+    private EnvioService envioService;
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> listar(){
-        List<Categoria> listaCategorias = categoriaService.findAll();
-        if(listaCategorias.isEmpty()){
+    public ResponseEntity<List<Envio>> listar(){
+        List<Envio> listaEnvios = envioService.findAll();
+        if(listaEnvios.isEmpty()){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(listaCategorias);
+        return ResponseEntity.ok(listaEnvios);
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> guardar(@RequestBody Categoria categoria){
-        Categoria nuevaCategoria = categoriaService.save(categoria);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaCategoria);
+    public ResponseEntity<Envio> guardar(@RequestBody Envio envio){
+        Envio nuevoEnvio = envioService.save(envio);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoEnvio);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> buscar(@PathVariable Long id){
+    public ResponseEntity<Envio> buscar(@PathVariable Long id){
         try{
-            Categoria categoria = categoriaService.findById(id);
-            return ResponseEntity.ok(categoria);
+            Envio envio = envioService.findById(id);
+            return ResponseEntity.ok(envio);
         }catch (Exception e){
             return ResponseEntity.notFound().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> actualizar(@PathVariable Long id, @RequestBody Categoria categoria){
+    public ResponseEntity<Envio> actualizar(@PathVariable Long id, @RequestBody Envio envio){
         try{
-            categoriaService.save(categoria);
-            return ResponseEntity.ok(categoria);
+            envioService.save(envio);
+            return ResponseEntity.ok(envio);
         }catch( Exception e){
             return ResponseEntity.notFound().build();
         }
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Categoria> patchCategoria(@PathVariable Long id, @RequestBody Categoria parcialCategoria) {
+    public ResponseEntity<Envio> patchEnvio(@PathVariable Long id, @RequestBody Envio parcialEnvio) {
         try {
-            Categoria actualizarCategoria = categoriaService.patchCategoria(id, parcialCategoria);
-            return ResponseEntity.ok(actualizarCategoria);
+            Envio actualizarEnvio = envioService.patchEnvio(id, parcialEnvio);
+            return ResponseEntity.ok(actualizarEnvio);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
@@ -73,7 +73,7 @@ public class CategoriaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id){
         try{
-            categoriaService.delete(id);
+            envioService.delete(id);
             return ResponseEntity.noContent().build();
         }catch (Exception e){
             return ResponseEntity.notFound().build();
