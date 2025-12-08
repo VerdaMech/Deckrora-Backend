@@ -7,10 +7,13 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+
 import com.deckora.controller.CategoriaControllerV2;
 import com.deckora.model.Categoria;
 //Hypermedia as the Engine of Application State (HATEOAS)
 //Principio de arquitectura REST que describe como guiar al cliente a traves de los recursos de la API
+
+
 @Component
 public class CategoriaModelAssembler implements RepresentationModelAssembler<Categoria, EntityModel<Categoria>>{
     @SuppressWarnings("null")

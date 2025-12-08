@@ -28,7 +28,8 @@ public class OrdenModelAssembler implements RepresentationModelAssembler<Orden, 
             linkTo(methodOn(OrdenControllerV2.class).patchOrden(Long.valueOf(orden.getId()), orden)).withRel("patch_orden"),
             linkTo(methodOn(OrdenControllerV2.class).deleteOrden(Long.valueOf(orden.getId()))).withRel("eliminar_orden"),
             linkTo(methodOn(OrdenControllerV2.class).getOrdenByFechaSolicitadaBetween("fecha_inicio", "fecha_final")).withRel("buscar_por_fecha_inicio_y_fecha_final"),
-            linkTo(methodOn(OrdenControllerV2.class).getOrdenByPagoYEnvio(1, 1)).withRel("buscar_por_id_pago_y_id_envio")
+            linkTo(methodOn(OrdenControllerV2.class).getOrdenByPagoYEnvio(1, 1)).withRel("buscar_por_id_pago_y_id_envio"),
+            linkTo(methodOn(OrdenControllerV2.class).buscarPorUsuario(1)).withRel("buscar_por_usuario")
             );
     }
 }

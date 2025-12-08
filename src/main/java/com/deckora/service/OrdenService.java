@@ -80,6 +80,10 @@ public class OrdenService {
         return ordenRepository.findByFechaBetween(fechaInicio,fechaFinal);
     }
 
+    public List<Orden> buscarPorUsuario(Integer idUsuario){
+        return ordenRepository.buscarPorUsuario(idUsuario);
+    }
+
     //Metodos Nuevos 2
     public List<Orden> buscarPorPagoYDelivery(Integer idPago, Integer idEnvio){
         Pago pago = pagoRepository.findById(Long.valueOf(idPago))

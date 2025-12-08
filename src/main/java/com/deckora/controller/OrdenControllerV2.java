@@ -129,6 +129,21 @@ public class OrdenControllerV2 {
         return ResponseEntity.ok(CollectionModel.of(ordenesModel));
     }
 
+    //get con query 4
+    @GetMapping(value = "por-usuario/{idUsuario}", produces = MediaTypes.HAL_JSON_VALUE)
+    @Operation(summary = "Este método obtiene todas las ordenes de un usuario", description = "A través del id de un usuario, este método muestra una orden o lista de ordenes filtradas usuario")
+    public ResponseEntity<CollectionModel<EntityModel<Orden>>> buscarPorUsuario(
+        @Parameter(description = "id de usuario", required = true, example = "1") 
+        @PathVariable Integer idUsuario){
+    List<Orden> ordenes = ordenService.buscarPorUsuario( idUsuario);
+
+    List<EntityModel<Orden>> ordenesModel = ordenes.stream()
+        .map(assembler::toModel)
+        .toList();
+
+        return ResponseEntity.ok(CollectionModel.of(ordenesModel));
+    }
+
     //Metodo para buscar por fechas
     @GetMapping(value = "/fechas/{fechaInicio}/{fechaFin}", produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Este método obtiene una orden o lista de ordenes entre 2 fechas", description = "A través de 2 fechas, este método muestra una lista de ordenes realizadas entre medio de las 2 fechas ingresadas")

@@ -15,6 +15,14 @@ import com.deckora.model.Pago;
 public interface OrdenRepository extends JpaRepository<Orden,Long> {
 
 
+    
+    @Query("""
+       SELECT o FROM Orden o
+       WHERE o.usuario.id = :idUsuario
+       """)
+    List<Orden> buscarPorUsuario(@Param("idUsuario") Integer idUsuario);
+
+
     //Query 1, Buscar ordenes que tengan x estado y x usuario
     @Query("""
         SELECT o FROM Orden o
